@@ -1,30 +1,928 @@
 <!DOCTYPE html>
-<html data-lt-installed=true lang="en-US">
+<html lang="en">
 <head>
-	<meta charset=utf-8>
-	<meta name=viewport content="width=device-width,initial-scale=1">
-	<meta name=theme-color content=#000000>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name=description content="Halil UGUR - Personal page">
-	<title>Halil UGUR - @halilugur</title>
-	<link rel="stylesheet" href="main.css">
+    <title>Halil UGUR - Senior Java Developer</title>
 	<link rel="icon" type="image/x-icon" href="images/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'mono': ['JetBrains Mono', 'monospace'],
+                        'sans': ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        'dark': '#0a0a0a',
+                        'darker': '#050505',
+                        'accent': '#00ff88',
+                        'accent-dark': '#00cc6a',
+                    },
+                    animation: {
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'fade-in': 'fadeIn 1s ease-out',
+                        'terminal': 'terminal 1s steps(1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes glow {
+            from { box-shadow: 0 0 20px #00ff88; }
+            to { box-shadow: 0 0 30px #00ff88, 0 0 40px #00ff88; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes terminal {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        .terminal-cursor::after {
+            content: '|';
+            animation: terminal 1s infinite;
+            color: #00ff88;
+        }
+        .code-bg {
+            background: linear-gradient(45deg, #0a0a0a 25%, transparent 25%), 
+                        linear-gradient(-45deg, #0a0a0a 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #0a0a0a 75%), 
+                        linear-gradient(-45deg, transparent 75%, #0a0a0a 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+        html { scroll-behavior: smooth; }
+    </style>
 </head>
+<body class="bg-darker text-white font-sans overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-dark/90 backdrop-blur-lg z-50 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="font-mono text-xl font-bold">
+                    <span class="text-accent">&lt;</span>
+                    <span class="text-white">halil.ugur</span>
+                    <span class="text-accent">/&gt;</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-300 hover:text-accent transition-colors font-mono text-sm">.home()</a>
+                    <a href="#about" class="text-gray-300 hover:text-accent transition-colors font-mono text-sm">.about()</a>
+                    <a href="#experience" class="text-gray-300 hover:text-accent transition-colors font-mono text-sm">.experience()</a>
+                    <a href="#skills" class="text-gray-300 hover:text-accent transition-colors font-mono text-sm">.skills()</a>
+                    <a href="#projects" class="text-gray-300 hover:text-accent transition-colors font-mono text-sm">.projects()</a>
+                    <a href="#contact" class="text-gray-300 hover:text-accent transition-colors font-mono text-sm">.contact()</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-toggle" class="text-accent">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-dark border-t border-gray-800">
+            <div class="px-6 py-4 space-y-4">
+                <a href="#home" class="block text-gray-300 hover:text-accent transition-colors font-mono text-sm">.home()</a>
+                <a href="#about" class="block text-gray-300 hover:text-accent transition-colors font-mono text-sm">.about()</a>
+                <a href="#experience" class="block text-gray-300 hover:text-accent transition-colors font-mono text-sm">.experience()</a>
+                <a href="#skills" class="block text-gray-300 hover:text-accent transition-colors font-mono text-sm">.skills()</a>
+                <a href="#projects" class="block text-gray-300 hover:text-accent transition-colors font-mono text-sm">.projects()</a>
+                <a href="#contact" class="block text-gray-300 hover:text-accent transition-colors font-mono text-sm">.contact()</a>
+            </div>
+        </div>
+    </nav>
 
-<body>
-	<noscript class=sf-hidden>You need to enable JavaScript to run this app!</noscript>
-	<div id=home class="title bg-transparent bgstyle text-light min-vh-100 d-flex align-content-center align-items-center flex-wrap m-0 jumbotron jumbotron-fluid" style="overflow:hidden;background:rgba(0,0,0,0) linear-gradient(136deg,rgb(68,132,206),rgb(26,215,192),rgb(255,155,17),rgb(155,89,182),rgb(255,127,127),rgb(236,240,241)) repeat scroll 0% 0% / 1200% 1200%">
-	<div id=stars></div>
-		<div class="text-center container">
-			<h1 class=display-1>Halil UGUR</h1>
-			<div class="Typist lead typist">Java Software Engineer | Architect</div>
-			<div class=p-5>
-				<a target=_blank rel="noopener noreferrer" aria-label="Halil UGUR's GitHub" href=https://github.com/halilugur><i class="fab fa-github fa-3x socialicons"></i></a>
-				<a target=_blank rel="noopener noreferrer" aria-label="Halil UGUR's LinkedIn" href=https://www.linkedin.com/in/halilugur/><i class="fab fa-linkedin fa-3x socialicons"></i></a>
-				<a target=_blank rel="noopener noreferrer" aria-label="Halil UGUR's Youtube" href=https://www.youtube.com/halilugur/><i class="fab fa-youtube fa-3x socialicons"></i></a>		
-			</div>
-			<a class="btn btn-outline-light btn-lg" role=button aria-label="Contact" href="mailto:mr.halilugur@gmail.com" target="_blank">Contact</a>
-			<a target=_blank class="btn btn-outline-light btn-lg" role=button aria-label="New site" href="https://ugurhalil.com" style="margin-left: 10px;">Personal Site →</a>
-		</div>
-	</div>
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative code-bg">
+        <div class="absolute inset-0 bg-gradient-to-br from-dark/80 to-darker/90"></div>
+        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+            <div class="mb-8">
+                <div class="font-mono text-accent text-lg mb-4">
+                    <span class="text-gray-400">const</span> 
+                    <span class="text-white">developer</span> 
+                    <span class="text-gray-400">=</span> 
+                    <span class="text-yellow-400">{</span>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold mb-4 animate-slide-up">
+                    <span class="text-white">Halil</span> 
+                    <span class="text-accent">UGUR</span>
+                </h1>
+                <div class="font-mono text-lg md:text-xl text-gray-300 mb-6">
+                    <span class="text-gray-400">role:</span> 
+                    <span class="text-orange-400">"</span><span id="typing-text" class="terminal-cursor"></span><span class="text-orange-400">"</span>
+                </div>
+                <div class="font-mono text-accent text-lg">
+                    <span class="text-yellow-400">}</span>
+                </div>
+            </div>
+            
+            <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+                Building scalable enterprise applications with <span class="text-accent font-semibold">7+ years</span> of expertise in Java ecosystem
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#projects" class="bg-accent text-dark px-8 py-4 rounded-lg font-semibold hover:bg-accent-dark transform hover:scale-105 transition-all duration-300 animate-glow">
+                    View My Work
+                </a>
+                <a href="https://github.com/halilugur" target="_blank" class="border-2 border-accent text-accent px-8 py-4 rounded-lg font-semibold hover:bg-accent hover:text-dark transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </div>
+        </div>
+        
+        <!-- Floating Code Elements -->
+        <div class="absolute top-20 left-10 text-accent/20 font-mono text-sm animate-pulse">
+            <div>public class Developer {</div>
+            <div class="ml-4">private String name = "Halil";</div>
+            <div>}</div>
+        </div>
+        <div class="absolute bottom-20 right-10 text-accent/20 font-mono text-sm animate-pulse" style="animation-delay: 1s;">
+            <div>@SpringBootApplication</div>
+            <div>@RestController</div>
+            <div>@Service</div>
+        </div>
+    </section>    
+<!-- About Section -->
+    <section id="about" class="py-20 bg-dark">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-8">
+                        <span class="text-gray-400 font-mono text-2xl">// </span>
+                        <span class="text-white">About</span>
+                        <span class="text-accent">Me</span>
+                    </h2>
+                    <div class="space-y-6 text-gray-300 text-lg leading-relaxed">
+                        <p>
+                            I'm a <span class="text-accent font-semibold">Senior Java Software Engineer</span> with a passion for building robust, scalable enterprise applications. My journey spans across diverse industries including Finance, Tourism, Telecommunications, E-commerce, and Cargo sectors.
+                        </p>
+                        <p>
+                            Specialized in <span class="text-accent">Spring Boot</span>, <span class="text-accent">microservices architecture</span>, and full-stack development. I thrive in agile environments and have a proven track record of delivering solutions that serve millions of users.
+                        </p>
+                        <div class="bg-darker p-6 rounded-lg border border-gray-800 font-mono text-sm">
+                            <div class="text-gray-400">// Current focus areas</div>
+                            <div class="text-accent">const expertise = [</div>
+                            <div class="ml-4 text-orange-400">"Enterprise Architecture",</div>
+                            <div class="ml-4 text-orange-400">"Microservices Design",</div>
+                            <div class="ml-4 text-orange-400">"Cloud-Native Solutions",</div>
+                            <div class="ml-4 text-orange-400">"Team Leadership"</div>
+                            <div class="text-accent">];</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="bg-darker p-6 rounded-lg border border-gray-800 hover:border-accent/50 transition-colors">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-envelope text-accent text-xl mr-4"></i>
+                            <div>
+                                <h3 class="font-semibold text-white">Email</h3>
+                                <p class="text-gray-400 font-mono text-sm">mr.halilugur@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-darker p-6 rounded-lg border border-gray-800 hover:border-accent/50 transition-colors">
+                        <div class="flex items-center mb-4">
+                            <i class="fab fa-linkedin text-accent text-xl mr-4"></i>
+                            <div>
+                                <h3 class="font-semibold text-white">LinkedIn</h3>
+                                <a href="https://www.linkedin.com/in/halilugur" target="_blank" class="text-accent hover:text-accent-dark font-mono text-sm">
+                                    linkedin.com/in/halilugur
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-darker p-6 rounded-lg border border-gray-800 hover:border-accent/50 transition-colors">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-map-marker-alt text-accent text-xl mr-4"></i>
+                            <div>
+                                <h3 class="font-semibold text-white">Location</h3>
+                                <p class="text-gray-400 font-mono text-sm">Istanbul, Turkey</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-darker">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">
+                <span class="text-gray-400 font-mono text-2xl">// </span>
+                <span class="text-white">Professional</span>
+                <span class="text-accent">Journey</span>
+            </h2>
+            
+            <div class="space-y-8">
+                <!-- Experience Item 1 -->
+                <div class="bg-dark p-8 rounded-lg border border-gray-800 hover:border-accent/30 transition-all duration-300 group">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-2">Java Software Engineer</h3>
+                            <h4 class="text-accent font-semibold text-lg">Turkish Technology</h4>
+                            <p class="text-gray-400 font-mono text-sm">Istanbul, Turkey</p>
+                        </div>
+                        <div class="bg-accent/10 text-accent px-4 py-2 rounded-full font-mono text-sm mt-4 md:mt-0">
+                            Nov 2023 - Present
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h5 class="text-white font-semibold mb-3">Key Achievements:</h5>
+                            <ul class="space-y-2 text-gray-300">
+                                <li class="flex items-start">
+                                    <span class="text-accent mr-2 mt-1">▸</span>
+                                    Architected Cargo MG, IATA One Record, D2D, ApronEye applications
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-accent mr-2 mt-1">▸</span>
+                                    Designed domain-based database structures (PostgreSQL, Oracle)
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-accent mr-2 mt-1">▸</span>
+                                    Achieved 99%+ uptime with TDD-driven REST APIs
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="text-white font-semibold mb-3">Tech Stack:</h5>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">Spring Boot</span>
+                                <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">Quarkus</span>
+                                <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">Kafka</span>
+                                <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">React</span>
+                                <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">Angular</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience Item 2 -->
+                <div class="bg-dark p-8 rounded-lg border border-gray-800 hover:border-accent/30 transition-all duration-300 group">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-2">Java Software Engineer</h3>
+                            <h4 class="text-accent font-semibold text-lg">Guavapay</h4>
+                            <p class="text-gray-400 font-mono text-sm">Dublin, Ireland (Remote)</p>
+                        </div>
+                        <div class="bg-accent/10 text-accent px-4 py-2 rounded-full font-mono text-sm mt-4 md:mt-0">
+                            Jul 2022 - Oct 2023
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h5 class="text-white font-semibold mb-3">Key Achievements:</h5>
+                            <ul class="space-y-2 text-gray-300">
+                                <li class="flex items-start">
+                                    <span class="text-accent mr-2 mt-1">▸</span>
+                                    Architected unified loyalty platform for mobile & web
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-accent mr-2 mt-1">▸</span>
+                                    Reduced response times by 40% through caching
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-accent mr-2 mt-1">▸</span>
+                                    Delivered global loyalty program serving worldwide customers
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="text-white font-semibold mb-3">Tech Stack:</h5>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">Spring Boot</span>
+                                <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">RabbitMQ</span>
+                                <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">PostgreSQL</span>
+                                <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">Redis</span>
+                                <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">ReactJS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience Item 3 -->
+                <div class="bg-dark p-8 rounded-lg border border-gray-800 hover:border-accent/30 transition-all duration-300 group">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-2">Java Software Engineer</h3>
+                            <h4 class="text-accent font-semibold text-lg">Huawei</h4>
+                            <p class="text-gray-400 font-mono text-sm">Istanbul, Turkey</p>
+                        </div>
+                        <div class="bg-accent/10 text-accent px-4 py-2 rounded-full font-mono text-sm mt-4 md:mt-0">
+                            Jan 2021 - Jan 2022
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h5 class="text-white font-semibold mb-3">Key Achievements:</h5>
+                            <ul class="space-y-2 text-gray-300">
+                                <li class="flex items-start">
+                                    <span class="text-accent mr-2 mt-1">▸</span>
+                                    Built performance measurement apps for telecom devices
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-accent mr-2 mt-1">▸</span>
+                                    Improved system performance by 25% through optimization
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-accent mr-2 mt-1">▸</span>
+                                    Created ReactJS dashboards for data visualization
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="text-white font-semibold mb-3">Tech Stack:</h5>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">PostgreSQL</span>
+                                <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">MyBatis</span>
+                                <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">ReactJS</span>
+                                <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">Spring Boot</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience Item 4 -->
+                <div class="bg-dark p-8 rounded-lg border border-gray-800 hover:border-accent/30 transition-all duration-300 group">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-2">Java Hybris Developer</h3>
+                            <h4 class="text-accent font-semibold text-lg">Renova Consulting</h4>
+                            <p class="text-gray-400 font-mono text-sm">Istanbul, Turkey</p>
+                        </div>
+                        <div class="bg-accent/10 text-accent px-4 py-2 rounded-full font-mono text-sm mt-4 md:mt-0">
+                            Nov 2017 - Jan 2021
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h5 class="text-white font-semibold mb-3">Key Achievements:</h5>
+                            <ul class="space-y-2 text-gray-300">
+                                <li class="flex items-start">
+                                    <span class="text-accent mr-2 mt-1">▸</span>
+                                    Led team of 3 developers, improved productivity by 30%
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-accent mr-2 mt-1">▸</span>
+                                    Delivered e-commerce platforms serving 1M+ users
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-accent mr-2 mt-1">▸</span>
+                                    Reduced manual processes by 60% via SAP integration
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="text-white font-semibold mb-3">Tech Stack:</h5>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">SAP Hybris</span>
+                                <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">Spring</span>
+                                <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">AngularJS</span>
+                                <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">RabbitMQ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>   
+ <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-dark">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">
+                <span class="text-gray-400 font-mono text-2xl">// </span>
+                <span class="text-white">Technical</span>
+                <span class="text-accent">Arsenal</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Backend -->
+                <div class="bg-darker p-6 rounded-lg border border-gray-800 hover:border-accent/50 transition-all duration-300 group">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mr-4 group-hover:bg-accent/30 transition-colors">
+                            <i class="fas fa-server text-accent text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Backend Development</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-300 font-mono text-sm">Java (8/11/17/21)</span>
+                                <span class="text-accent font-mono text-sm">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-300 font-mono text-sm">Spring Boot</span>
+                                <span class="text-accent font-mono text-sm">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-300 font-mono text-sm">Microservices</span>
+                                <span class="text-accent font-mono text-sm">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="bg-gray-800 text-gray-300 px-2 py-1 rounded text-xs font-mono">Quarkus</span>
+                            <span class="bg-gray-800 text-gray-300 px-2 py-1 rounded text-xs font-mono">Hibernate</span>
+                            <span class="bg-gray-800 text-gray-300 px-2 py-1 rounded text-xs font-mono">REST APIs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Database -->
+                <div class="bg-darker p-6 rounded-lg border border-gray-800 hover:border-accent/50 transition-all duration-300 group">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mr-4 group-hover:bg-accent/30 transition-colors">
+                            <i class="fas fa-database text-accent text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Database Systems</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-300 font-mono text-sm">PostgreSQL</span>
+                                <span class="text-accent font-mono text-sm">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-300 font-mono text-sm">Oracle</span>
+                                <span class="text-accent font-mono text-sm">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-300 font-mono text-sm">MongoDB</span>
+                                <span class="text-accent font-mono text-sm">75%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="bg-gray-800 text-gray-300 px-2 py-1 rounded text-xs font-mono">MySQL</span>
+                            <span class="bg-gray-800 text-gray-300 px-2 py-1 rounded text-xs font-mono">Redis</span>
+                            <span class="bg-gray-800 text-gray-300 px-2 py-1 rounded text-xs font-mono">Apache Solr</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frontend -->
+                <div class="bg-darker p-6 rounded-lg border border-gray-800 hover:border-accent/50 transition-all duration-300 group">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mr-4 group-hover:bg-accent/30 transition-colors">
+                            <i class="fas fa-code text-accent text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Frontend Technologies</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-300 font-mono text-sm">ReactJS</span>
+                                <span class="text-accent font-mono text-sm">80%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-300 font-mono text-sm">AngularJS</span>
+                                <span class="text-accent font-mono text-sm">75%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-300 font-mono text-sm">JavaScript</span>
+                                <span class="text-accent font-mono text-sm">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="bg-gray-800 text-gray-300 px-2 py-1 rounded text-xs font-mono">Spartacus</span>
+                            <span class="bg-gray-800 text-gray-300 px-2 py-1 rounded text-xs font-mono">JSF</span>
+                            <span class="bg-gray-800 text-gray-300 px-2 py-1 rounded text-xs font-mono">JSP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cloud & DevOps -->
+                <div class="bg-darker p-6 rounded-lg border border-gray-800 hover:border-accent/50 transition-all duration-300 group">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mr-4 group-hover:bg-accent/30 transition-colors">
+                            <i class="fas fa-cloud text-accent text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Cloud & DevOps</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-300 font-mono text-sm">AWS</span>
+                                <span class="text-accent font-mono text-sm">80%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-300 font-mono text-sm">Docker</span>
+                                <span class="text-accent font-mono text-sm">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-300 font-mono text-sm">Kubernetes</span>
+                                <span class="text-accent font-mono text-sm">70%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="bg-gray-800 text-gray-300 px-2 py-1 rounded text-xs font-mono">Azure</span>
+                            <span class="bg-gray-800 text-gray-300 px-2 py-1 rounded text-xs font-mono">GitLab CI/CD</span>
+                            <span class="bg-gray-800 text-gray-300 px-2 py-1 rounded text-xs font-mono">OpenShift</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Message Brokers -->
+                <div class="bg-darker p-6 rounded-lg border border-gray-800 hover:border-accent/50 transition-all duration-300 group">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mr-4 group-hover:bg-accent/30 transition-colors">
+                            <i class="fas fa-exchange-alt text-accent text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Message Brokers</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-300 font-mono text-sm">Apache Kafka</span>
+                                <span class="text-accent font-mono text-sm">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-300 font-mono text-sm">RabbitMQ</span>
+                                <span class="text-accent font-mono text-sm">80%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-300 font-mono text-sm">JMS</span>
+                                <span class="text-accent font-mono text-sm">75%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="bg-gray-800 text-gray-300 px-2 py-1 rounded text-xs font-mono">IBM MQ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools & Methodologies -->
+                <div class="bg-darker p-6 rounded-lg border border-gray-800 hover:border-accent/50 transition-all duration-300 group">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mr-4 group-hover:bg-accent/30 transition-colors">
+                            <i class="fas fa-tools text-accent text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Tools & Methods</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-300 font-mono text-sm">Agile/Scrum</span>
+                                <span class="text-accent font-mono text-sm">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-300 font-mono text-sm">TDD</span>
+                                <span class="text-accent font-mono text-sm">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-300 font-mono text-sm">Git</span>
+                                <span class="text-accent font-mono text-sm">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="bg-gray-800 text-gray-300 px-2 py-1 rounded text-xs font-mono">Maven</span>
+                            <span class="bg-gray-800 text-gray-300 px-2 py-1 rounded text-xs font-mono">Gradle</span>
+                            <span class="bg-gray-800 text-gray-300 px-2 py-1 rounded text-xs font-mono">JIRA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> 
+   <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-darker">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">
+                <span class="text-gray-400 font-mono text-2xl">// </span>
+                <span class="text-white">Featured</span>
+                <span class="text-accent">Projects</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="bg-dark p-8 rounded-lg border border-gray-800 hover:border-accent/50 transition-all duration-300 group hover:transform hover:scale-105">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-accent to-accent-dark rounded-lg flex items-center justify-center mr-4 group-hover:animate-glow">
+                            <i class="fas fa-shipping-fast text-dark text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-2">Cargo Management Platform</h3>
+                            <p class="text-gray-400 font-mono text-sm">Enterprise Solution</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        Comprehensive cargo message tracking and management platform (Cargo MG) for airline operations. Features real-time tracking, automated workflows, and integration with multiple airline systems.
+                    </p>
+                    <div class="mb-6">
+                        <h4 class="text-white font-semibold mb-3">Key Features:</h4>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-center"><span class="text-accent mr-2">✓</span> Real-time cargo tracking</li>
+                            <li class="flex items-center"><span class="text-accent mr-2">✓</span> Multi-airline integration</li>
+                            <li class="flex items-center"><span class="text-accent mr-2">✓</span> Automated message processing</li>
+                        </ul>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">Spring Boot</span>
+                        <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">PostgreSQL</span>
+                        <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">Kafka</span>
+                        <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">React</span>
+                    </div>
+                    <div class="flex items-center text-accent font-mono text-sm">
+                        <i class="fas fa-external-link-alt mr-2"></i>
+                        <span>Production System</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="bg-dark p-8 rounded-lg border border-gray-800 hover:border-accent/50 transition-all duration-300 group hover:transform hover:scale-105">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-plane text-white text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-2">IATA One Record</h3>
+                            <p class="text-gray-400 font-mono text-sm">Aviation Standard</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        Modern data sharing solution following IATA One Record standards for aviation industry. Enables seamless data exchange between airlines, ground handlers, and cargo agents.
+                    </p>
+                    <div class="mb-6">
+                        <h4 class="text-white font-semibold mb-3">Key Features:</h4>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-center"><span class="text-accent mr-2">✓</span> IATA compliant APIs</li>
+                            <li class="flex items-center"><span class="text-accent mr-2">✓</span> Real-time data synchronization</li>
+                            <li class="flex items-center"><span class="text-accent mr-2">✓</span> Multi-stakeholder integration</li>
+                        </ul>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">Quarkus</span>
+                        <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">Oracle</span>
+                        <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">REST APIs</span>
+                        <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">TDD</span>
+                    </div>
+                    <div class="flex items-center text-accent font-mono text-sm">
+                        <i class="fas fa-external-link-alt mr-2"></i>
+                        <span>Industry Standard</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="bg-dark p-8 rounded-lg border border-gray-800 hover:border-accent/50 transition-all duration-300 group hover:transform hover:scale-105">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-shopping-cart text-white text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-2">E-commerce Platform</h3>
+                            <p class="text-gray-400 font-mono text-sm">1M+ Users</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        Multi-tenant B2B/B2C e-commerce solution built with SAP Hybris Commerce. Supports multiple databases, payment systems, and serves over 1 million active users.
+                    </p>
+                    <div class="mb-6">
+                        <h4 class="text-white font-semibold mb-3">Key Features:</h4>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-center"><span class="text-accent mr-2">✓</span> Multi-tenant architecture</li>
+                            <li class="flex items-center"><span class="text-accent mr-2">✓</span> B2B & B2C support</li>
+                            <li class="flex items-center"><span class="text-accent mr-2">✓</span> SAP integration</li>
+                        </ul>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">SAP Hybris</span>
+                        <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">Spring</span>
+                        <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">AngularJS</span>
+                        <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">RabbitMQ</span>
+                    </div>
+                    <div class="flex items-center text-accent font-mono text-sm">
+                        <i class="fas fa-users mr-2"></i>
+                        <span>1,000,000+ Users</span>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="bg-dark p-8 rounded-lg border border-gray-800 hover:border-accent/50 transition-all duration-300 group hover:transform hover:scale-105">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-gift text-white text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-2">Loyalty Management</h3>
+                            <p class="text-gray-400 font-mono text-sm">Global Platform</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        Scalable loyalty program platform supporting mobile and web applications with unified flows. Serves global customers with real-time rewards and personalized experiences.
+                    </p>
+                    <div class="mb-6">
+                        <h4 class="text-white font-semibold mb-3">Key Features:</h4>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-center"><span class="text-accent mr-2">✓</span> Real-time rewards</li>
+                            <li class="flex items-center"><span class="text-accent mr-2">✓</span> Mobile & web support</li>
+                            <li class="flex items-center"><span class="text-accent mr-2">✓</span> Global scalability</li>
+                        </ul>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">Spring Boot</span>
+                        <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">PostgreSQL</span>
+                        <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">Redis</span>
+                        <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-mono">ReactJS</span>
+                    </div>
+                    <div class="flex items-center text-accent font-mono text-sm">
+                        <i class="fas fa-globe mr-2"></i>
+                        <span>Global Deployment</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GitHub CTA -->
+            <div class="text-center mt-12">
+                <a href="https://github.com/halilugur" target="_blank" class="inline-flex items-center bg-darker border border-accent text-accent px-8 py-4 rounded-lg font-semibold hover:bg-accent hover:text-dark transition-all duration-300 group">
+                    <i class="fab fa-github mr-3 text-xl group-hover:animate-pulse"></i>
+                    <span>View More Projects on GitHub</span>
+                    <i class="fas fa-external-link-alt ml-3"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-dark">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-8">
+                <span class="text-gray-400 font-mono text-2xl">// </span>
+                <span class="text-white">Let's</span>
+                <span class="text-accent">Connect</span>
+            </h2>
+            <p class="text-xl text-center text-gray-300 mb-12 max-w-2xl mx-auto">
+                Ready to discuss your next project? I'm always interested in challenging opportunities and innovative solutions.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <a href="mailto:mr.halilugur@gmail.com" class="bg-darker p-6 rounded-lg border border-gray-800 hover:border-accent/50 transition-all duration-300 group text-center hover:transform hover:scale-105">
+                    <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-accent/30 transition-colors">
+                        <i class="fas fa-envelope text-accent text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Email</h3>
+                    <p class="text-gray-400 font-mono text-sm">mr.halilugur@gmail.com</p>
+                </a>
+
+                <a href="https://www.linkedin.com/in/halilugur" target="_blank" class="bg-darker p-6 rounded-lg border border-gray-800 hover:border-accent/50 transition-all duration-300 group text-center hover:transform hover:scale-105">
+                    <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-accent/30 transition-colors">
+                        <i class="fab fa-linkedin text-accent text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">LinkedIn</h3>
+                    <p class="text-gray-400 font-mono text-sm">Professional Network</p>
+                </a>
+
+                <a href="https://github.com/halilugur" target="_blank" class="bg-darker p-6 rounded-lg border border-gray-800 hover:border-accent/50 transition-all duration-300 group text-center hover:transform hover:scale-105">
+                    <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-accent/30 transition-colors">
+                        <i class="fab fa-github text-accent text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">GitHub</h3>
+                    <p class="text-gray-400 font-mono text-sm">Code Repository</p>
+                </a>
+
+                <div class="bg-darker p-6 rounded-lg border border-gray-800 hover:border-accent/50 transition-all duration-300 group text-center">
+                    <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-accent/30 transition-colors">
+                        <i class="fas fa-map-marker-alt text-accent text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Location</h3>
+                    <p class="text-gray-400 font-mono text-sm">Istanbul, Turkey</p>
+                </div>
+            </div>
+
+            <!-- Terminal-style contact form -->
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-darker rounded-lg border border-gray-800 overflow-hidden">
+                    <div class="bg-gray-900 px-4 py-2 flex items-center">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                        </div>
+                        <div class="ml-4 text-gray-400 font-mono text-sm">contact.sh</div>
+                    </div>
+                    <div class="p-6 font-mono text-sm">
+                        <div class="text-gray-400 mb-2">$ ./contact.sh --message="Let's build something amazing together!"</div>
+                        <div class="text-accent mb-2">Initializing connection...</div>
+                        <div class="text-gray-300 mb-4">Ready to receive your message. Choose your preferred communication channel above.</div>
+                        <div class="text-gray-400">
+                            <span class="text-accent">halil@portfolio</span>:<span class="text-blue-400">~</span>$ <span class="terminal-cursor"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-darker border-t border-gray-800 py-8">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="font-mono text-gray-400 mb-4 md:mb-0">
+                    <span class="text-accent">&copy;</span> 2025 Halil UGUR. All rights reserved.
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://github.com/halilugur" target="_blank" class="text-gray-400 hover:text-accent transition-colors">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/halilugur" target="_blank" class="text-gray-400 hover:text-accent transition-colors">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="mailto:mr.halilugur@gmail.com" class="text-gray-400 hover:text-accent transition-colors">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script-v2.js"></script>
 </body>
 </html>
